@@ -2443,6 +2443,10 @@ figcaption {
   border-bottom-color: #2962ff;
 }
 
+.display-none {
+  display: none;
+}
+
 @media screen and (max-width: 991px) {
   h1 {
     font-size: 3rem;
