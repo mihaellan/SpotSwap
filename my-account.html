@@ -1,4 +1,4 @@
-<!DOCTYPE html><!--  Last Published: Tue Jul 04 2023 19:12:16 GMT+0000 (Coordinated Universal Time)  -->
+<!DOCTYPE html><!--  Last Published: Fri Sep 08 2023 09:39:02 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="645f56ef0429258bf1cc915c" data-wf-site="644e2d11560cbe88d3fd84da" lang="en">
 <head>
   <meta charset="utf-8">
@@ -41,7 +41,7 @@ body{
       <div class="nav-links-wrapper">
         <div class="nav-menu-mask">
           <a href="search-car-owner.html" class="nav-link w-nav-link">Search Car Owner</a>
-          <a href="#" class="nav-link w-nav-link">Contact</a>
+          <a href="#" class="nav-link display-none w-nav-link">Contact</a>
         </div>
         <div class="nav-account-menu">
           <a data-ms-content="mbrs-only" href="my-account.html" aria-current="page" class="user-account-link w-inline-block w--current"><img src="images/avatar.svg" loading="lazy" alt="">
@@ -55,7 +55,7 @@ body{
     </div>
   </div>
   <div class="main-wrapper">
-    <section class="section inner-pages wf-section">
+    <section class="section inner-pages">
       <div class="container">
         <div class="column">
           <div class="heading-wrapper">
@@ -83,7 +83,15 @@ body{
                     <div class="text-field-wrapper-2 _15p-right"><label for="First-Name-4" class="input-label">Names</label><input type="text" class="input w-input" maxlength="256" name="First-Name-4" data-name="First Name 4" placeholder="" id="First-Name-4" data-ms-member="names" required=""></div>
                   </div>
                   <div class="text-field-wrapper-2"><label for="Phone-2" class="input-label">Phone</label><input type="text" class="input w-input" maxlength="256" name="Phone-2" data-name="Phone 2" placeholder="" id="Phone-2" data-ms-member="phone-number" required=""></div>
-                  <div class="text-field-wrapper-2"><label for="Phone-2" class="input-label">Car Registration Number</label><input type="text" class="input w-input" maxlength="256" name="Phone-2" data-name="Phone 2" placeholder="" id="Phone-2" data-ms-member="car-registration-number" required=""></div><input type="submit" value="Save Profile" data-wait="Please wait..." class="button-2 absolute w-button">
+                  <div class="text-field-wrapper-2"><label for="Phone-2" class="input-label">Car Registration Number</label><input type="text" class="input w-input" maxlength="256" name="Phone-2" data-name="Phone 2" placeholder="" id="Phone-2" data-ms-member="car-registration-number" required=""></div>
+                  <div class="margin-bot-s">
+                    <h2 class="small-h1">Listed in &quot;Search Car Owner&quot; page<span></span></h2>
+                  </div>
+                  <div class="text-field-wrapper-2"><label for="Select" class="input-label">Do you want to be listed in &quot;Search Car Owner&quot; page?</label><select id="Select" name="Select" data-name="Select" data-ms-member="visibility-in-catalog" class="input-selection w-select">
+                      <option value="">Select one...</option>
+                      <option value="Yes">Yes</option>
+                      <option value="No">No</option>
+                    </select></div><input type="submit" value="Save Profile" data-wait="Please wait..." class="button-2 absolute w-button">
                 </form>
                 <div class="w-form-done">
                   <div>Thank you! Your submission has been received!</div>
@@ -135,7 +143,7 @@ body{
       </div>
     </section>
   </div>
-  <footer class="footer-section wf-section">
+  <footer class="footer-section">
     <div class="container grid">
       <div id="w-node-_73c87ccf-69c8-d53d-9241-241543a429d2-654d2164" class="column">
         <a href="index.html" class="footer-brand w-nav-brand"><img src="images/logo.svg" loading="lazy" alt="" class="footer-logo"></a>
@@ -143,7 +151,7 @@ body{
       <div id="w-node-_2a616156-a789-3c89-957b-096767c03146-654d2164" class="footer-made-with">
         <div>All Rights Reserved</div>
       </div>
-      <div id="w-node-_0f2189c3-cd67-8bae-1b70-bf24a1e4cd11-654d2164" class="footer-copyright">Bachelor project of <a href="https://www.linkedin.com/in/mihaela-nikolova/" target="_blank">Mihaela Nikolova</a>
+      <div id="w-node-_0f2189c3-cd67-8bae-1b70-bf24a1e4cd11-654d2164" class="footer-copyright">Bachelor project of <a href="https://github.com/mihaellan/SpotSwap" target="_blank">Mihaela Nikolova</a>
       </div>
     </div>
   </footer>
@@ -171,65 +179,6 @@ Webflow.push(function () {
         }
     });
 });
-  //  Track user login status , Update UI element upon changes on login state
-auth.onAuthStateChanged(user => {
- var currentPath = window.location.pathname;
- if (user) {
-   	console.log(user);
-    console.log('user logged in');
-   	if (document.querySelector('#signInButton')) {
-    signInButton.style.display="none";
-    }
-    signOutButton.style.display="block";
-   	$('#registerPageLink').hide();
-   	$('#loginPageLink').hide();
-    if(user.photoURL !== null){
-      $('#userProfilePic').replaceWith( '<img src="https://assets.website-files.com/62b1862e5a0919db1481ce4d/62b46532388d11831033b49f_avatar.svg" class="nav_account-avatar" id="userProfilePic">' );
-      $('#userProfilePic').attr('src', user.photoURL);
-    }
-    loader.style.display='none';
-  } else {
-    console.log('user logged out');
-    $('#nav_avatar-link').attr("href", "/login");
-    signOutButton.style.display="none";
-    if (document.querySelector('#signInButton')) {
-    signInButton.style.display="block";
-    }
-    $('#registerPageLink').show();
-   	$('#loginPageLink').show();
-    loader.style.display='none';
-  }
-})
-//  SignUp and Signout Fuctions
-const signout = () => {
-    auth.signOut();
-}
-var provider = new firebase.auth.GoogleAuthProvider();
-const signup = () => {
-  firebase.auth().signInWithPopup(provider);
-  firebase.auth()
-    .getRedirectResult()
-    .then((result) => {
-      if (result.credential) {
-        /** @type {firebase.auth.OAuthCredential} */
-        var credential = result.credential;
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        var token = credential.accessToken;
-        // ...
-      }
-      // The signed-in user info.
-      var user = result.user;
-    }).catch((error) => {
-      // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      // The email of the user's account used.
-      var email = error.email;
-      // The firebase.auth.AuthCredential type that was used.
-      var credential = error.credential;
-      // ...
-    });
-};
 </script>
   <script>document.getElementById('copyright').replaceWith(document.createTextNode(new Date().getFullYear()))</script>
 </body>
